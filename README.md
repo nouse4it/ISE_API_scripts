@@ -14,14 +14,14 @@ Author: nouse4it <github@schlueter-online.net>
 Illustrate the following conecepts:
 - Get all network devices for from ISE and store them in csv format
 
-## Use Case Description
+### Use Case Description
 
 The scripts is used to gather all Network Devices from Cisco ISE by Rest API.
 It then saves alle the informations into a csv file.
 The script leverages the Cisco ISE ERS API
 For more informations see [ERS API Documentation](https://community.cisco.com/t5/security-documents/ise-ers-api-examples/ta-p/3622623#toc-hId--721274487)
 
-## Installation
+### Installation
 You will need the Python Module [requests](https://pypi.org/project/requests/)
 You can install it via `pip install requests`
 
@@ -29,13 +29,13 @@ You can install it via `pip install requests`
 
 Python Version must be at least v3.6
 
-## Usage
+### Usage
 When you run the script, you will asked to input the following informations:
 * IP of Cisco ISE
 * Username of ERS API user
 * Password of ERS API user
 
-## How it works
+### How it works
 The script queries the API for the wanted informations (you can adjust this script to gather other informations aswell)
 When there are a lot of information, the API pages the returned Informations.
 Maximum a 100 results can be received at one page.
