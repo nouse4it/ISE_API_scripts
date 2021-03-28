@@ -40,3 +40,37 @@ The script queries the API for the wanted informations (you can adjust this scri
 When there are a lot of information, the API pages the returned Informations.
 Maximum a 100 results can be received at one page.
 So when you have more than 100 devices, the script checks for how many pages would be available and writes the results of every page into the csv.
+
+
+## check_MAC_EIG.py
+
+Illustrate the following conecepts:
+- Check if given MAC-Address is in given Endpoint Group on ISE
+- Scripts intended for Users without Admin User on ISE
+
+### Use Case Description
+
+The scripts is used to check if given MAC Address is in Endpoint Identity Grouop.
+The script leverages the Cisco ISE ERS API
+For more informations see [ERS API Documentation](https://community.cisco.com/t5/security-documents/ise-ers-api-examples/ta-p/3622623#toc-hId--721274487)
+
+### Installation
+You will need the Python Module [requests](https://pypi.org/project/requests/)
+You can install it via `pip install requests`
+
+[Documentation](https://requests.readthedocs.io/en/master/) for more informations regardings requests.
+
+Python Version must be at least v3.6
+
+### Usage
+When you run the script, you will asked to input the following informations:
+* IP of Cisco ISE
+* Username of ERS API user
+* Password of ERS API user
+* MAC Address to search for
+* Endpoint Identity Group to check against
+
+### How it works
+The script queries the API for the wanted informations (you can adjust this script to gather other informations aswell)
+When there are a lot of information, the API pages the returned Informations.
+Maximum a 100 results can be received at one page.
