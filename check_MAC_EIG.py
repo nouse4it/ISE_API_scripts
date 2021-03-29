@@ -19,12 +19,13 @@ import urllib3
 import requests
 import json
 import pprint
+import getpass
 
 urllib3.disable_warnings()
 
 ise_ip = input('Enter IP Address of ISE: ')
 api_user = input('Enter API Username: ')
-api_pw = input ('Enter API Password: ')
+api_pw = getpass.getpass(prompt='Enter API Password: ')
 
 #------------------------------------------------------------------------------
 def get_groupid(groupname):
