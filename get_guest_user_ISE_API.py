@@ -31,39 +31,43 @@ api_pw = getpass.getpass(prompt='Enter API Password: ')
 # ------------------------------------------------------------------------------
 
 
-def get_devices():
-    url = 'https://{}:9060/ers/config/networkdevice/'.format(ise_ip)
+def get_user():
+    url = 'https://{}:9060/ers/config/guestuser/'.format(ise_ip)
     headers = {'ACCEPT': 'application/json',
                'content-type': 'application/json'}
     req = requests.get(url, headers=headers, auth=(
         api_user, api_pw), verify=False)
-    total = (json.loads(req.text))
-    items = total['SearchResult']['total']
-    page = items / 100
-    pages = round(page)
-    devices = []
-    with open('export_ise.csv', 'w') as f:
+    myjson = req.text
+    parsed_json = (json.loads(myjson))
+    users = []
+    with open('export_guestuser_ise.csv', 'w') as f:
         writer = csv.writer(f)
-        for i in range(1, pages+1):
-            url_page = 'https://{}:9060/ers/config/networkdevice?size=100&page={}'.format(
-                ise_ip, i)
-            req_page = requests.get(url_page, headers=headers, auth=(
+        # for i in range(1, pages+1):
+        # url_page = 'https://{}:9060/ers/config/guestuser?size=100&page={}'.format(
+        # ise_ip, i)
+        # req_page = requests.get(url_page, headers=headers, auth=(
+        # api_user, api_pw), verify=False)
+        #myjson = req_page.text
+        #parsed_json = (json.loads(myjson))
+        for user in parsed_json['SearchResult']['resources']:
+            users.append(user['id'])
+        for id in users:
+            url = 'https://{}:9060/ers/config/guestuser/{}'.format(ise_ip, id)
+            req = requests.get(url, headers=headers, auth=(
                 api_user, api_pw), verify=False)
-            myjson = req_page.text
+            myjson = req.text
             parsed_json = (json.loads(myjson))
-            for device in parsed_json['SearchResult']['resources']:
-                devices.append(device['id'])
-        for id in devices:
-            url_page = 'https://{}:9060/ers/config/networkdevice/{}'.format(
-                ise_ip, id)
-            req_page = requests.get(url_page, headers=headers, auth=(
-                api_user, api_pw), verify=False)
-            myjson = req_page.text
-            parsed_json = (json.loads(myjson))
-            name = parsed_json['NetworkDevice']['name']
-            ip = (parsed_json['NetworkDevice']
-                  ['NetworkDeviceIPList'][0]['ipaddress'])
-            row = [name, ip]
+            username = parsed_json['GuestUser']['guestInfo']['userName']
+            firstname = parsed_json['GuestUser']['guestInfo']['firstName']
+            lastname = parsed_json['GuestUser']['guestInfo']['lastName']
+            company = parsed_json['GuestUser']['guestInfo']['company']
+            enabled = parsed_json['GuestUser']['guestInfo']['enabled']
+            validdays = parsed_json['GuestUser']['guestAccessInfo']['validDays']
+            fromdate = parsed_json['GuestUser']['guestAccessInfo']['fromDate']
+            todate = parsed_json['GuestUser']['guestAccessInfo']['toDate']
+            location = parsed_json['GuestUser']['guestAccessInfo']['location']
+            row = [username, firstname, lastname, company,
+                   enabled, validdays, fromdate, todate, location]
             writer.writerow(row)
 
 # ==============================================================================
@@ -71,4 +75,4 @@ def get_devices():
 # ==============================================================================
 
 
-get_devices()
+get_user()
