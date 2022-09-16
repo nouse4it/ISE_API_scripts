@@ -42,13 +42,15 @@ def get_user():
     users = []
     with open('export_guestuser_ise.csv', 'w') as f:
         writer = csv.writer(f)
+        writer.writerow(["Username", "First Name", "Last Name", "Company",
+                        "Enabled", "Valid Days", "From Date", "To Date", "Location"])
         # for i in range(1, pages+1):
         # url_page = 'https://{}:9060/ers/config/guestuser?size=100&page={}'.format(
         # ise_ip, i)
         # req_page = requests.get(url_page, headers=headers, auth=(
         # api_user, api_pw), verify=False)
-        #myjson = req_page.text
-        #parsed_json = (json.loads(myjson))
+        # myjson = req_page.text
+        # parsed_json = (json.loads(myjson))
         for user in parsed_json['SearchResult']['resources']:
             users.append(user['id'])
         for id in users:
