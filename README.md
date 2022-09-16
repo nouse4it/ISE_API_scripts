@@ -4,7 +4,7 @@
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
 # ISE_API_scripts
-Use API calls to gather informations from Cisco ISE (tested with v2.7 Patch3)
+Use API calls to gather informations from Cisco ISE (tested with v3.1)
 
 Author: nouse4it <github@schlueter-online.net>
 
