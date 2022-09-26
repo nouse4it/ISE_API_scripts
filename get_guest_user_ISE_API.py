@@ -24,9 +24,9 @@ import getpass
 
 requests.packages.urllib3.disable_warnings()
 
-ise_ip = input('Enter IP Address of ISE: ')
-api_user = input('Enter API Username: ')
-api_pw = getpass.getpass(prompt='Enter API Password: ')
+ise_ip = '172.25.32.8'  # input('Enter IP Address of ISE: ')
+api_user = 'ersadmin'  # input('Enter API Username: ')
+api_pw = 'Fuj!tsu2022'  # getpass.getpass(prompt='Enter API Password: ')
 
 # ------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ def get_user():
     users = []
     # Using CSV Writer to export defined fields from 'parsed_json' to a csv-file
     # Also rows and fields of csv are writte and configured
-    with open('export_guestuser_ise.csv', 'w') as f:
+    with open('export_guestuser_ise.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(["Username", "First Name", "Last Name", "Company",
                         "Enabled", "Valid Days", "From Date", "To Date", "Location"])
